@@ -38,7 +38,11 @@ export default {
   },
   mounted () {
     this.$http.get(`${this.$serverUrl}/homepage`).then((res) => {
-      this.driverList = res.data;
+      this.driverList = res.data.sort((item1, item2) => {
+        const score1 = (item1.master_score + item1.truck_score)*100/2;
+        const score2 = (item2.master_score + item2.truck_score)*100/2;        
+        return score2 - score1;
+      });
     })
   },
   data() {
