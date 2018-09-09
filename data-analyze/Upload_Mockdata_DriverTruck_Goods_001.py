@@ -50,6 +50,8 @@ t_make = df_dt.t_make
 t_model = df_dt.t_model
 t_num_engine = df_dt.t_num_engine
 t_regdate =  pd.to_datetime(df_dt.t_regdate)
+t_regdate.index = t_regdate
+t_regdate = t_regdate['1979':'2000']
 t_issuedate =  pd.to_datetime(df_dt.t_issuedate)
 t_maxload = df_dt.t_maxload.astype(str)
 t_width = df_dt.t_width.astype(str)
@@ -60,14 +62,16 @@ t_engineoilchangedate =  pd.to_datetime(df_dt.t_engineoilchangedate)
 
 # goods data
 g_pickdate = pd.to_datetime(df_g.g_pickdate)
+g_pickdate.index = g_pickdate
+g_pickdate = g_pickdate['2000':'2019']
 g_pickzipcode = zipcode['0'].values.tolist()
 g_delivzipcode = zipcode['0'].values.tolist()
 g_dist = df_g.g_dist
 g_weight = df_g.g_weight.astype(str)
-g_movement = df_g.g_rest.astype(str)
-g_num_violations = ['speed', 'line', 'emergency', 'drug', 'CLEAR']
-g_accident = ['sleep', 'alcohol', 'external', 'CLEAR']
-g_incident =  ['tyre', 'motor', 'structure', 'CLEAR']
+g_movement = ["True"] * 70 + ["False"] *30
+g_num_violations = ['speed', 'line', 'emergency', 'drug'] + ["CLEAR"] * 96
+g_accident = ['sleep', 'alcohol', 'external'] + ["CLEAR"] * 97
+g_incident =  ['tyre', 'motor', 'structure'] + ["CLEAR"] * 97
 
 # Set database connection
 from pymongo import MongoClient
