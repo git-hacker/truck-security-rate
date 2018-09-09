@@ -6,7 +6,7 @@
             </div>
             <div class="item-content" >
             <div class="item-title">{{title}}</div>
-            <div class="item-data">休息比：90%</div>
+            <div class="item-data">{{content}}</div>
             </div>
         </div>
 
@@ -26,6 +26,7 @@ export default {
     },
     props: {
         title: String,
+        content: String,
         color: String,
         icon: String,
         updesc: String,
@@ -47,7 +48,7 @@ export default {
     overflow: hidden;
     color: white;
     .item-left-bg {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.2);
       width : 65%;
       display: flex;
       justify-content: space-between;
@@ -64,11 +65,31 @@ export default {
         height: auto;
       }
     }
+    
     .item-content {
       width: 70%
+      text-align: left;
+      .item-title {
+        font-size:20px;
+        font-family:PingFangSC-Regular;
+        font-weight:400;
+        color:rgba(255,255,255,1);
+        line-height:28px;
+        letter-spacing:2px;
+      }
+      .item-data{
+        font-size:14px;
+        font-family:PingFangSC-Regular;
+        font-weight:400;
+        color:rgba(255,255,255,1);
+        line-height:20px;
+        letter-spacing:2px;
+      }
     }
     .item-desc {
-      width: 35%;
+      width: 30%;
+      padding: 0 15px;
+      text-align: left;
       img{
         width: 100%;
         height: 100%;
