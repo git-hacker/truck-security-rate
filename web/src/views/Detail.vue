@@ -2,16 +2,17 @@
   <div class="detail-container">
     <header class="banner">
       <img class="banner-bg" src="../assets/img/detail-banner.png" alt="banner">
-      <div class="title left">
-        <div class="sub-title licence">
-          {{driverDetail.licenceNum}}
-        </div>
+      <div class="title">
+        <img class="driver-avatar" :src="driverDetail.driverAvatar" alt="avatar">
         <div class="driver-info">
-          <img class="driver-avatar" :src="driverDetail.driverAvatar" alt="avatar">
           <span>{{driverDetail.driverName}}</span>
+        </div>
+        <div class="licence">
+          {{driverDetail.licenceNum}}
         </div>
       </div>
     </header>
+    
     <div class="score">
       <div class="score-title">
         <div class="sub-title">安全值评估</div>
@@ -19,12 +20,16 @@
       </div>
       <img src="@/assets/img/security-badge.png" alt="security-badge">
     </div>
-    <div class="category">值得信赖</div>
-    <div class="score">
-      
-      <div class="truck-score"></div>
-      
-      <div class="driver-score"></div>
+    <div class="category">{{this.category}}</div>
+    <div class="score">  
+      <div class="sub-score ">
+        <div class="sub-title">人物指数</div>
+        <CircleChart chartsName="driver-chart" :score="this.driverDetail.driverScore"></CircleChart>
+      </div>
+      <div class="sub-score">
+        <div class="sub-title">卡车指数</div>
+        <CircleChart chartsName="truck-chart" :score="this.driverDetail.truckScore"></CircleChart>
+      </div>
     </div>
     
     <div class="detail-list">
@@ -83,11 +88,13 @@
 
 <script>
 import DetailItem from "../components/DetailItem.vue";
+import CircleChart from "../components/CircleChart.vue";
 import testData from "../assets/data/driver-detail.json";
 export default {
   name: "detail",
   components: {
-    DetailItem
+    DetailItem,
+    CircleChart
   },
   data() {
     return {
@@ -98,6 +105,12 @@ export default {
   computed: {
     totleScore() {
       return (this.driverDetail.driverScore + this.driverDetail.truckScore) / 2;
+    },
+    category() {
+      if (this.totleScore >= 75 ) return '安全可靠';
+      else if (this.totleScore >= 50) return '值得信赖'
+      else if (this.totleScore >= 25) return '有待改进'
+      else return '马路杀手'
     }
   }
 };
@@ -114,25 +127,29 @@ export default {
     width: 100%;
     height: auto;
   }
-
   .title {
     color: white;
-    text-align: left;
+    font-size:18px;
+    font-family:PingFangSC-Light;
+    font-weight:300;
+    text-align: center;
     position: absolute;
-    bottom: 20px;
-
-    &.left {
-      left: 5%;
-
-      .driver-avatar {
-        height: 39px;
-        width: 39px;
-        border-radius: 50%;
-      }
+    bottom: 23%;
+    left: 0;
+    right: 0;
+    .licence {
+      font-size:24px;
+      font-family:PingFangSC-Regular;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+      line-height:33px;
+      letter-spacing:3px;
     }
-
-    &.right {
-      right: 5%;
+    .driver-avatar {
+      height: 70px;
+      width: 70px;
+      border-radius: 50%;
+      border: solid 7px white;
     }
   }
 }
@@ -144,6 +161,7 @@ export default {
   color:rgba(155,155,155,0.3);
   line-height:50px;
   letter-spacing:2px;
+  margin-bottom: 20px;
 }
 
 .score {
@@ -152,6 +170,9 @@ export default {
   padding: 0 5%;
   text-align: left;
   align-items : center;
+  .sub-score {
+    text-align: center;
+  }
   img {
     width: 88px;
     height: 88px;

@@ -18,10 +18,10 @@ os.chdir(path)
 
 # Import data
 import pandas as pd
-df_d = pd.read_csv("MOCK_DATA.csv")
-df_t = pd.read_csv("MOCK_DATA_truck.csv")
-df_g = pd.read_csv("MOCK_DATA_goods.csv")
-zipcode = pd.read_csv("zipcodeVF.csv")
+df_d = pd.read_csv("./MockDataTemplate/MOCK_DATA.csv")
+df_t = pd.read_csv("./MockDataTemplate/MOCK_DATA_truck.csv")
+df_g = pd.read_csv("./MockDataTemplate/MOCK_DATA_goods.csv")
+zipcode = pd.read_csv("./MockDataTemplate/zipcodeVF.csv")
 
 # combine driver and trucks
 df_dt = pd.concat([df_d.reset_index(drop=True), df_t], axis=1)
