@@ -13,15 +13,16 @@ Created on Fri Sep  7 22:31:27 2018
 """
 # Set working directory
 import os
-path = 'C:/Users/pierr/Desktop/Hackathon/DB'
+path = 'C:/Users/pierr/Documents/GitHub/truck-security-rate/data-analyze/MockDateTemplate'
 os.chdir(path)
 
 # Import data
 import pandas as pd
-df_d = pd.read_csv("./MockDataTemplate/MOCK_DATA.csv")
-df_t = pd.read_csv("./MockDataTemplate/MOCK_DATA_truck.csv")
-df_g = pd.read_csv("./MockDataTemplate/MOCK_DATA_goods.csv")
-zipcode = pd.read_csv("./MockDataTemplate/zipcodeVF.csv")
+df_d = pd.read_csv("MOCK_DATA.csv")
+df_t = pd.read_csv("MOCK_DATA_truck.csv")
+df_g = pd.read_csv("MOCK_DATA_goods.csv")
+zipcode = pd.read_csv("zipcodeVF.csv")
+avatar = pd.read_csv("avatar.csv")
 
 # combine driver and trucks
 df_dt = pd.concat([df_d.reset_index(drop=True), df_t], axis=1)
@@ -33,6 +34,7 @@ from datetime import timedelta
 
 # driver data
 d_name = df_dt.d_name
+d_avatar = avatar['0'].values.tolist()
 d_phone_nb = df_dt.d_phone_nb
 d_license = df_dt.d_license.astype(str)
 d_idcard = df_dt.d_idcard
@@ -73,15 +75,19 @@ from pymongo import MongoClient
 client = MongoClient()
 db = client.HackDB01
 
+db.DriversTrucks.delete_many({})
+db.Goods.delete_many({})
+
 # set number of driver/truck to add to DB
-n_dt = 10
+n_dt = 1000
 # set number of trips for each driver
-n_g = 20
+n_g = 300
 
 for x in range(1, n_dt):
     # Create fake data for driver and truck and loop
     data_dt = {
         'd_name' : d_name[randint(0, (len(d_name)-1))],
+        'd_avatar': d_avatar[randint(0, len(d_avatar)-1)],
         'd_phone_nb' : d_phone_nb[randint(0, (len(d_phone_nb)-1))],
         'd_license': d_license[randint(0, (len(d_license)-1))],
         'd_id_card': d_idcard[randint(0, (len(d_idcard)-1))],
