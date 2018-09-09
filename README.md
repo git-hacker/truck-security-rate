@@ -1,5 +1,4 @@
 # Truck Driver Secirity Rate 
-# Truck Driver Secirity Rate 
 Truck driver safety assessment
 
 ## 1. Data analysis phase
