@@ -18,7 +18,7 @@ con <- mongo(collection = "Goods",
              url = "mongodb://localhost",
              verbose = FALSE)
 
-goods <- con$find(query = '{}', field = '{}')
+goods <- con$find(query = '{}')
 
 # Merge dataset left on goods
 df <- goods %>%
@@ -42,7 +42,7 @@ df <- goods %>%
          t_maxload = as.numeric(t_maxload),
          g_weight = as.numeric(g_weight),
          load_score = if_else(g_weight > t_maxload, -2, 0),
-         truck_age = as.numeric(difftime(timestamp_calc, t_issuedate) / 24),
+         truck_age = as.numeric(difftime(timestamp_calc, t_issuedate)),
          total_score = rest_score + time_score + accident_score + violation_score + load_score,
          safety_score = total_score / max(total_score),
          safety_category = cut(safety_score,
@@ -51,6 +51,7 @@ df <- goods %>%
   group_by(t_id) %>%
   summarize(nbr_trip = n(),
             avg_rest = sum(g_movement) / n(),
+            avg_rest_score = mean(rest_score, na.rm = TRUE),
             nbr_days_drive = sum(totaldays),
             total_dist_drive = sum(g_dist),
             max_dist = max(g_dist),
@@ -63,8 +64,7 @@ df <- goods %>%
             latest_tyre_change = max(g_pickdate[which(g_incident == "tyre")]),
             avg_safety_score = mean(safety_score, na.rm = TRUE),
             avg_weight = mean(g_weight, na.rm = TRUE),
-            max_weight = max(g_weight),
-            avg_safety_score = mean(safety_score, na.rm = TRUE)) %>%
+            max_weight = max(g_weight)) %>%
   mutate(timestamp_calc = Sys.time(),
          latest_tyre_change = ymd_hms(latest_tyre_change),
          latest_tyre_change = if_else(is.na(latest_tyre_change),
@@ -72,8 +72,9 @@ df <- goods %>%
          tyre_unchanged_time = as.numeric(difftime(Sys.time(), latest_tyre_change) / 24),
          maintenance_score = if_else(tyre_unchanged_time > 365, 0, 1),
          avg_daily_score = if_else(avg_daily_dist < 1000, 1, 0),
-         accident_score = if_else(nbr_accident / nbr_trip > 0.05, 0, 1),
+         accident_score = if_else(nbr_accident / nbr_trip > quantile(nbr_accident / nbr_trip, probs = 0.25), 0, 1),
          mileage_score = if_else(total_dist_drive / truck_age * 365 > 300000, 0, 1),
+         avg_rest_score = avg_rest_score / max(avg_rest_score),
          truck_score = (maintenance_score + avg_daily_score + accident_score + mileage_score) / 4,
          master_score = (avg_safety_score + truck_score) / max(avg_safety_score + truck_score))  %>%
   left_join(driverstrucks, by = c("t_id" = "_id"))
@@ -87,5 +88,3 @@ con <- mongo(collection = "score",
 con$drop()
 # Insert new score data
 con$insert(df)
-
-
