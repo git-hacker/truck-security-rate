@@ -82,6 +82,7 @@
         :downdesc= "this.latestChangeTyle">
       </DetailItem>
     </div>
+    <el-button type="primary" class="bottom-btn">联系司机</el-button>
   </div>
 </template>
 
@@ -226,6 +227,21 @@ export default {
       font-weight: normal;
     }
   }
+}
+.detail-list {
+  margin-bottom: 90px;
+}
+.bottom-btn{
+  position: fixed;
+  height: 59px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1374E6;
+  font-size: 20px;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
 }
 
 </style>
