@@ -1,0 +1,18 @@
+{
+    "driverName": "鹿园",
+    "driverAvatar": "https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEKDkhlia9HMLD994cxLu5415RDnPUrTekowOkO8zwjscUsuxEBOnVujYnZlP8N90pgqIbfcTGFZsOg/132",
+    "driverScore":77,
+    "licenceNum": "川A 88888",
+    "truckScore":66,
+    "missTime": 0,
+    "onTime": 9,
+    "driveTime": 48,
+    "sleepTime": 15,
+    "isExamined": true,
+    "infractionTime": 2,
+    "fixedTime": 2,
+    "maintenanceTime" : 3,
+    "mileage": 300,
+    "truckAge": 3,
+    "changeTireTime": 1506200367129
+}
