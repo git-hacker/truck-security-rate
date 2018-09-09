@@ -37,7 +37,7 @@ export default {
     DriverCard
   },
   mounted () {
-    this.$http.get('http://192.168.102.123:5000/homepage').then((res) => {
+    this.$http.get(`${this.$serverUrl}/homepage`).then((res) => {
       this.driverList = res.data;
     })
   },

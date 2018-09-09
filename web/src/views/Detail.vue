@@ -96,7 +96,7 @@ export default {
   },
   beforeCreate () {
     const driverId = this.$route.query.driverId;
-    this.$http.get(`http://192.168.102.123:5000/detail?_id=${driverId}`).then((res) => {
+    this.$http.get(`${this.$serverUrl}/detail?_id=${driverId}`).then((res) => {
       this.driverDetail = res.data;
       if (!res.data){
         alert("can not get detail data!")
