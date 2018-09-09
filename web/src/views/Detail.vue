@@ -13,7 +13,7 @@
       </div>
     </header>
     
-    <div class="score">
+    <div class="score narrow">
       <div class="score-title">
         <div class="sub-title">安全值评估</div>
         <div class="totle-score">{{totleScore}}<span>分</span></div>
@@ -196,12 +196,15 @@ export default {
   padding: 0 5%;
   text-align: left;
   align-items : center;
+  &.narrow{
+    padding: 0 10%;
+  }
   .sub-score {
     text-align: center;
   }
   img {
-    width: 88px;
-    height: 88px;
+    width: 100px;
+    height: 100px;
   }
   .sub-title {
     font-size:18px;

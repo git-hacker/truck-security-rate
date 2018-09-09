@@ -40,7 +40,7 @@ export default {
     margin-top: 15px;
     img.driver-avatar{
       width: auto;
-      height: 90%;
+      height: 80%;
       border-radius : 50%;
       border: solid #D7E4FF 5px ;
     }
