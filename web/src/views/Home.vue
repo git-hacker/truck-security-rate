@@ -3,7 +3,7 @@
     <header class="banner">
       <img src="@/assets/img/banner.png" alt="banner">
       <div class="banner-title">
-        <h2>司机安全评估</h2>
+        <h2>卡车司机安全评估</h2>
         <div>找到放心司机</div>
       </div>
       <el-input
@@ -17,10 +17,10 @@
     <content class="home-content">
       <driver-card v-for="(item, index) in filterDiiverList" 
         :key = "index" 
-        :driverId="item._id" 
-        :driverName="item.driverName" 
-        :driverAvatar="item.driverAvatar" 
-        :driverScore="item.rateScore">
+        :driverId="item._id.$oid" 
+        :driverName="item.d_name" 
+        :driverAvatar="item.d_avatar" 
+        :driverScore="((item.master_score + item.truck_score)*100/2).toFixed(1)">
       </driver-card>
     </content>
   </div>
@@ -35,6 +35,11 @@ export default {
   name: "home",
   components: {
     DriverCard
+  },
+  mounted () {
+    this.$http.get('http://192.168.102.123:5000/homepage').then((res) => {
+      this.driverList = res.data;
+    })
   },
   data() {
     return {

@@ -48,7 +48,7 @@ export default {
     color: white;
     .item-left-bg {
       background: rgba(255,255,255,0.2);
-      width : 65%;
+      width : 60%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -58,7 +58,7 @@ export default {
       padding: 0 5%;
     }
     .item-icon {
-      width: 17%;
+      width: 15%;
       img{
         width: 100%;
         height: auto;
@@ -66,7 +66,7 @@ export default {
     }
     
     .item-content {
-      width: 70%
+      width: 75%
       text-align: left;
       .item-title {
         font-size:20px;
@@ -86,8 +86,9 @@ export default {
       }
     }
     .item-desc {
-      width: 30%;
-      padding: 0 15px;
+      width: 40%;
+      padding: 0 2%;
+      text-align: left;
       text-align: left;
       img{
         width: 100%;

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/driver-detail/${driverId}`" class="card-container">
+  <router-link :to="`/driver-detail/?driverId=${driverId}`" class="card-container">
       <div class="driver-card">
       <img :src="driverAvatar" class="driver-avatar" alt="avatar"/>
       <div class='driver-name'>{{driverName}}</div>
@@ -15,7 +15,7 @@ export default {
     driverId: String,
     driverAvatar: String,
     driverName: String,
-    driverScore: Number
+    driverScore: String
   }
 }
 </script>
@@ -48,12 +48,13 @@ export default {
       font-size:24px;
       font-family:PingFangSC-Regular;
       font-weight:400;
-      color:rgba(74,74,74,1);
+      color:rgba(147,159,193,1);
       line-height:33px;
-      letter-spacing:1px;
+      letter-spacing:2px;
     }
     .driver-score {
       font-size:36px;
+      width: 40%;
       font-family:PingFangSC-Semibold;
       font-weight:600;
       color:rgba(54,207,201,1);
