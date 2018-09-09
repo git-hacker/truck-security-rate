@@ -11,7 +11,6 @@
         </div>
 
         <div class="item-desc">
-            <!-- <img src="@/assets/img/right-water.png" alt=""> -->
             <div class="up-desc">{{updesc}}</div>
             <div class="down-desc">{{downdesc}}</div>
         </div>

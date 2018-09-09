@@ -15,7 +15,7 @@
       </el-input>
     </header>
     <content class="home-content">
-      <driver-card v-for="(item, index) in driverList" 
+      <driver-card v-for="(item, index) in filterDiiverList" 
         :key = "index" 
         :driverId="item._id" 
         :driverName="item.driverName" 
@@ -41,6 +41,17 @@ export default {
       searchInput: "",
       driverList: driverList
     };
+  },
+  computed: {
+    filterDiiverList() {
+      if(this.searchInput == "") {
+        return this.driverList;
+      } else {
+        return this.driverList.filter((item) => {
+          return item.driverName.includes(this.searchInput);
+        })
+      }
+    }
   }
 };
 </script>
@@ -89,7 +100,7 @@ div.home-container {
   }
 }
 .home-content {
-  margin-top: 275px;
+  margin-top: 300px;
   display: flex;
   flex-direction : column;
   align-items : center;
