@@ -11,6 +11,11 @@ Generate two routes, access the query database, and return the data to the front
 including two pages, first page to show ten pieces of data about the summary score for the driver
 second page is about the details about the driver and truck(anlysed before)
 
-## 4. Screenshot
+## 4. Video
+<iframe height=498 width=510 src='http://player.youku.com/embed/XMzgxNzMwMDcyOA==' frameborder=0 'allowfullscreen'></iframe>
+
+## 5. Screenshot
 ![](Info/index.png)
 ![](Info/detail.png)
+
+
