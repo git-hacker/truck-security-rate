@@ -63,8 +63,10 @@ df <- goods %>%
             latest_tyre_change = max(g_pickdate[which(g_incident == "tyre")]),
             avg_safety_score = mean(safety_score, na.rm = TRUE),
             avg_weight = mean(g_weight, na.rm = TRUE),
-            max_weight = max(g_weight)) %>%
-  mutate(latest_tyre_change = ymd_hms(latest_tyre_change),
+            max_weight = max(g_weight),
+            avg_safety_score = mean(safety_score, na.rm = TRUE)) %>%
+  mutate(timestamp_calc = Sys.time(),
+         latest_tyre_change = ymd_hms(latest_tyre_change),
          latest_tyre_change = if_else(is.na(latest_tyre_change),
                                       ymd_hms(truck_reg_date), latest_tyre_change),
          tyre_unchanged_time = as.numeric(difftime(Sys.time(), latest_tyre_change) / 24),
@@ -72,5 +74,18 @@ df <- goods %>%
          avg_daily_score = if_else(avg_daily_dist < 1000, 1, 0),
          accident_score = if_else(nbr_accident / nbr_trip > 0.05, 0, 1),
          mileage_score = if_else(total_dist_drive / truck_age * 365 > 300000, 0, 1),
-         truck_score = (maintenance_score + avg_daily_score + accident_score + mileage_score) / 4)
+         truck_score = (maintenance_score + avg_daily_score + accident_score + mileage_score) / 4,
+         master_score = (avg_safety_score + truck_score) / max(avg_safety_score + truck_score))  %>%
+  left_join(driverstrucks, by = c("t_id" = "_id"))
+
+# setup connection to score db
+con <- mongo(collection = "score",
+             db = "HackDB01",
+             url = "mongodb://localhost",
+             verbose = FALSE)
+# Drop all previous data
+con$drop()
+# Insert new score data
+con$insert(df)
+
 
