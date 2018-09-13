@@ -109,8 +109,8 @@ The UI proposes two pages:
 
 ## Screenshot
 
-![](Info/index.png=75)
-![](Info/detail.png=75)
+![](https://github.com/git-hacker/truck-security-rate/raw/master/Info/index.png=75)
+![](https://github.com/git-hacker/truck-security-rate/raw/master/Info/detail.png=75)
 
 
 ## Scoring System
