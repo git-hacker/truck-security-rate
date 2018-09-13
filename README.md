@@ -81,13 +81,13 @@ The database should be composed of 3 collections
 2. Cd Web project path
 3. Run ```npm install```
 4. Change ```serverUrl``` in src/config.js
-5. Run ```npm serve```
+5. Run ```npm run serve```
 6. Open browser and access http://localhost:8080
 #### production:
 1. Cd Web project path
-2. Run ```npm install*```
+2. Run ```npm install```
 3. Change ```serverUrl``` in src/config.js
-4. Run ```npm build``` and copy path dist into server project
+4. Run ```npm run build``` and copy path dist into server project
 5. Add static route in server project
 6. Access route
 
