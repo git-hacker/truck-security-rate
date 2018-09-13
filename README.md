@@ -105,7 +105,7 @@ The UI proposes two pages:
 
 ## Video
 
-<iframe height=498 width=510 src='http://player.youku.com/embed/XMzgxNzMwMDcyOA==' frameborder=0 'allowfullscreen'></iframe>
+http://player.youku.com/embed/XMzgxNzMwMDcyOA==
 
 ## Screenshot
 
