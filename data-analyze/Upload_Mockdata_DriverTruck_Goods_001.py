@@ -83,7 +83,7 @@ db.DriversTrucks.delete_many({})
 db.Goods.delete_many({})
 
 # set number of driver/truck to add to DB
-n_dt = 1000
+n_dt = 500
 # set number of trips for each driver
 n_g = 300
 

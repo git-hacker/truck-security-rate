@@ -1,3 +1,3 @@
 export default {
-    serverUrl: 'http://192.168.102.123:5000'
+    serverUrl: 'http://localhost:5000'
 }
