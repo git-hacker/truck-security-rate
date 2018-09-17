@@ -76,32 +76,41 @@ The database should be composed of 3 collections
 ### Run the Webapp
 
 *Need details how to setup and run the webapp*
-
-1. Generate two routes
-2. Access the query database
-3. Return the data to the front-end
+#### dev:
+1. Start Server Project and generate two routes
+2. Cd Web project path
+3. Run ```npm install```
+4. Change ```serverUrl``` in src/config.js
+5. Run ```npm run serve```
+6. Open browser and access http://localhost:8080
+#### production:
+1. Cd Web project path
+2. Run ```npm install```
+3. Change ```serverUrl``` in src/config.js
+4. Run ```npm run build``` and copy path dist into server project
+5. Add static route in server project
+6. Access route
 
 ## Usage
 
 The UI proposes two pages:
 
-* First page (Homepage)
-
+* First page (Homepage)  
     Display ten drivers data and their summary score
 
-* Second page (Driver Detail page)
+* Second page (Driver Detail page) 
     Details about the driver and truck
     
     *Need details about navigation in the app*
 
 ## Video
 
-<iframe height=498 width=510 src='http://player.youku.com/embed/XMzgxNzMwMDcyOA==' frameborder=0 'allowfullscreen'></iframe>
+http://player.youku.com/embed/XMzgxNzMwMDcyOA==
 
 ## Screenshot
 
-![](Info/index.png=75)
-![](Info/detail.png=75)
+![index](https://github.com/git-hacker/truck-security-rate/raw/master/Info/index.png)
+![detail](https://github.com/git-hacker/truck-security-rate/raw/master/Info/detail.png)
 
 
 ## Scoring System
